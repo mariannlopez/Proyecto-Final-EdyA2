@@ -1,0 +1,15 @@
+.footer {
+  background: var(--cafe-oscuro);
+  color: var(--crema);
+  padding: 40px 80px;
+  margin-top: 80px;
+}
+
+.footer__marca {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer__marca div { display: flex; flex-direction: column; }
+.footer__marca span { color: var(--texto-suave); font-size: 14px; }
