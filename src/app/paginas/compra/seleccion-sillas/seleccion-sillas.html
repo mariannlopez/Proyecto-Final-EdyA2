@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <form class="tarjeta-pago" (ngSubmit)="procesarCompraSimulada()">
+  <form class="tarjeta-pago">
     <div class="campo">
       <label for="email-pago">E-Mail</label>
       <input
@@ -138,7 +138,7 @@
     }
 
     <div class="acciones-pago">
-      <button type="submit" class="btn-pagar">Pagar</button>
+      <button type="button" class="btn-pagar" (click)="procesarCompraSimulada()">Pagar</button>
     </div>
   </form>
 </div>

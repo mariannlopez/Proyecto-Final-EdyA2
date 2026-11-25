@@ -116,6 +116,13 @@ export class SeleccionSillas implements OnInit{
   }
 
   procesarCompraSimulada(): void {
+    console.log('[SeleccionSillas] Click en Pagar', {
+    sillas: this.sillasSeleccionadas().length,
+    email: this.email(),
+    titular: this.nombreTitular(),
+    funcionId: this.funcionId(),
+    });
+
     if (this.sillasSeleccionadas().length === 0) {
       this.mensajeError.set('Selecciona al menos una silla antes de pagar.');
       return;
@@ -134,7 +141,7 @@ export class SeleccionSillas implements OnInit{
     });
 
     const primeraId = creadas[0]?.id;
-    this.router.navigate(['/tus-boletas'], {
+    this.router.navigate(['/compra', this.funcionId(), 'exito'], {
       state: { ultimaBoletaId: primeraId },
     });
   }
