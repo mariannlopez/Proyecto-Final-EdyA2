@@ -1,1 +1,34 @@
-<p>registro works!</p>
+<h1>Registro</h1>
+
+<div class="registro-container">
+    <div>
+        <label>Nombre</label>
+        <input type="text"
+            placeholder="Escribe tu nombre"
+            [ngModel]="nombre()"
+            (ngModelChange)="nombre.set($event)"
+        >
+    </div>
+    <div>
+        <label >Correo Electrónico</label>
+        <input type="email"
+            placeholder="Escribe tu correo electrónico"
+            [ngModel]="email()"
+            (ngModelChange)="email.set($event)"
+        >
+    </div>
+    <div>
+        <label>Contraseña</label>
+        <input type="password"
+            placeholder="Escribe tu contraseña"
+            [ngModel]="contrasena()"
+            (ngModelChange)="contrasena.set($event)"
+        >
+    </div>
+
+    <div>
+        <button type="button" (click)="handleRegister()">
+            Registrarse
+        </button>
+    </div>
+</div>

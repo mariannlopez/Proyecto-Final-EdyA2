@@ -49,8 +49,8 @@ h1 {
   padding: 0 0.9rem;
   font-size: 0.92rem;
   color: #2b2620;
-  background-color: #fdfbf7;
-  border: 1px solid #cfc6b8;
+  background-color: #FFF8EE;
+  border: 1px solid #3F342B;
   border-radius: 4px;
   box-sizing: border-box;
   outline: none;
@@ -74,7 +74,7 @@ h1 {
 .button-iniciar button,
 .registro button {
   width: 100%;
-  height: 42px;
+  height: 48px;
   padding: 0 1rem;
   font-size: 0.88rem;
   font-weight: 500;
@@ -86,7 +86,8 @@ h1 {
 .button-iniciar button {
     background-color: #fdfbf7;
   border: 1px solid #b8ae9f;
-  color: #2b2620;
+  font-weight: 600;
+  color: #6B5A4A;
 }
 
 .button-iniciar button:hover {
@@ -97,7 +98,8 @@ h1 {
 .registro button {
   background-color: #c79c18;
   border: 1px solid #c79c18;
-  color: #1f1b14;
+  font-weight: 600;
+  color: #3F342B;
 }
 
 .registro button:hover {
