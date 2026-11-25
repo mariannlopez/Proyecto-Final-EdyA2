@@ -12,8 +12,11 @@
             <button
               type="button"
               class="butaca"
-              [class]="'butaca butaca--' + silla.estado"
-              [disabled]="silla.estado === 'ocupada' || silla.estado === 'reservada'"
+              [class.butaca--libre]="silla.estado === 'libre'"
+              [class.butaca--ocupada]="silla.estado === 'ocupada' || sillaBloqueadaPorOtro(silla)"
+              [class.butaca--seleccionada]="silla.estado === 'seleccionada' && !sillaBloqueadaPorOtro(silla)"
+              [class.butaca--reservada]="silla.estado === 'reservada'"
+              [disabled]="silla.estado === 'ocupada' || silla.estado === 'reservada' || sillaBloqueadaPorOtro(silla)"
               (click)="alternarSilla(silla)"
             >
               <span class="butaca__respaldo">{{ silla.codigo }}</span>

@@ -386,3 +386,8 @@
     padding: 1.75rem 1.25rem;
   }
 }
+
+.butaca:disabled {
+  cursor: not-allowed;
+  transform: none;
+}
