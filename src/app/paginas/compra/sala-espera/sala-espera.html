@@ -1,1 +1,15 @@
-<p>sala-espera works!</p>
+<div class="sala-espera-card">
+  <h2>Estás en la Lista de Espera</h2>
+  <p>Te encuentras en la posición número:</p>
+
+  <div class="posicion-numero">
+    {{ esperaService.miPosicion() ?? '...' }}
+  </div>
+
+  <p>
+    En breves te dirigiremos a la zona de compra para que puedas obtener tu
+    boleta a la obra {{ nombreObra() }}
+  </p>
+
+  <button type="button" (click)="salirDeLaFila()">Salir de la Fila</button>
+</div>
