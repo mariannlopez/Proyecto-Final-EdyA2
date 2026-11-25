@@ -1,1 +1,38 @@
-<p>tus-boletas works!</p>
+<section class="contenedor pagina-boletas">
+  <p class="boletas__eyebrow">TE ESPERAMOS EN NUESTRO TEATRO</p>
+  <h1 class="boletas__titulo">Tus Boletas</h1>
+
+  <div class="boletas__panel">
+    @if (boletas().length === 0) {
+      <p class="boletas__estado">Aún no tienes boletas registradas.</p>
+    } @else {
+      <div class="boletas__grid">
+        @for (item of boletas(); track item.boleta.id) {
+          <article class="boleta-card">
+            <div class="boleta-card__imagen-wrap">
+              <img
+                [src]="item.imagen"
+                [alt]="item.tituloObra"
+                class="boleta-card__imagen"
+              />
+            </div>
+
+            <h2 class="boleta-card__titulo">{{ item.tituloObra }}</h2>
+
+            <div class="boleta-card__meta">
+              <p class="boleta-card__fecha">{{ item.fechaHora }}</p>
+              <p class="boleta-card__codigo">CÓDIGO: {{ item.boleta.codigo }}</p>
+            </div>
+
+            <a
+                [routerLink]="['/tus-boletas', item.boleta.id]"
+                class="boleta-card__boton"
+            >
+                Detalle de la Boleta
+            </a>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>

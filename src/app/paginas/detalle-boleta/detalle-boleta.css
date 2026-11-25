@@ -1,0 +1,109 @@
+.pagina-detalle {
+  padding-top: 48px;
+  padding-bottom: 84px;
+}
+
+.boleto-ticket {
+  background: var(--blanco, #ffffff);
+  border: 1px solid rgba(110, 91, 71, 0.22);
+  border-radius: 18px;
+  padding: 44px 52px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.85fr);
+  gap: 44px;
+  align-items: center;
+  box-shadow: 0 12px 28px rgba(48, 37, 26, 0.08);
+}
+
+.boleto-ticket__titulo {
+  margin: 0 0 24px;
+  font-family: var(--fuente-titulo, Georgia, serif);
+  font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--cafe-oscuro);
+}
+
+.boleto-ticket__subtitulo {
+  display: block;
+}
+
+.boleto-ticket__imagen-wrap {
+  max-width: 390px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.boleto-ticket__imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.boleto-ticket__derecha {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.boleto-ticket__fecha {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.boleto-ticket__silla {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cafe-oscuro);
+}
+
+.boleto-ticket__boton {
+  display: inline-block;
+  margin-top: 4px;
+  background: var(--dorado);
+  color: var(--cafe-oscuro);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 11px 22px;
+  border-radius: 3px;
+  transition: filter 0.15s ease;
+}
+
+.boleto-ticket__boton:hover {
+  filter: brightness(0.95);
+}
+
+.boleto-ticket__codigo {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dorado);
+}
+
+.boleto-ticket__vacio {
+  margin: 0;
+  color: var(--cafe-oscuro);
+}
+
+@media (max-width: 820px) {
+  .boleto-ticket {
+    grid-template-columns: 1fr;
+    padding: 28px 24px;
+    gap: 28px;
+  }
+
+  .boleto-ticket__imagen-wrap {
+    max-width: 100%;
+  }
+}
