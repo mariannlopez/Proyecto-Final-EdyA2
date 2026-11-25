@@ -1,0 +1,159 @@
+.contenedor-mapa {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.mapa-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 28px 36px 24px;
+  border: 1px solid var(--borde);
+}
+
+
+.escenario {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.escenario span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--texto-suave);
+  margin-bottom: 8px;
+}
+
+.escenario__linea {
+  height: 2px;
+  background: var(--dorado);
+  width: 100%;
+}
+
+/* Cuadrícula 6x4 */
+.grilla-sillas {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px 16px;
+  justify-items: center;
+  margin-bottom: 32px;
+}
+
+/* Forma de butaca de teatro */
+.butaca {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.12s ease;
+}
+
+.butaca:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.butaca__respaldo {
+  width: 30px;
+  height: 28px;
+  border-radius: 6px 6px 2px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fuente-texto);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.butaca__base {
+  width: 36px;
+  height: 7px;
+  border-radius: 2px;
+  margin-top: 2px;
+}
+
+
+.butaca--libre .butaca__respaldo,
+.butaca--libre .butaca__base {
+  background: var(--crema);
+  border: 1.5px solid var(--cafe-oscuro);
+  color: var(--cafe-oscuro);
+}
+
+
+.butaca--ocupada {
+  cursor: not-allowed;
+}
+.butaca--ocupada .butaca__respaldo,
+.butaca--ocupada .butaca__base {
+  background: var(--cafe);
+  border: 1.5px solid var(--cafe);
+  color: var(--crema);
+}
+
+
+.butaca--seleccionada .butaca__respaldo,
+.butaca--seleccionada .butaca__base {
+  background: var(--dorado);
+  border: 1.5px solid var(--dorado);
+  color: var(--cafe-oscuro);
+}
+
+
+.butaca--reservada {
+  cursor: not-allowed;
+}
+.butaca--reservada .butaca__respaldo,
+.butaca--reservada .butaca__base {
+  background: var(--blanco);
+  border: 1.5px dashed var(--texto-suave);
+  color: var(--texto-suave);
+}
+
+/* Leyenda inferior */
+.leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.leyenda__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--cafe-oscuro);
+}
+
+.leyenda__cuadro {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.leyenda__cuadro--libre {
+  background: var(--crema);
+  border: 1px solid var(--cafe-oscuro);
+}
+
+.leyenda__cuadro--ocupada {
+  background: var(--cafe);
+}
+
+.leyenda__cuadro--seleccionada {
+  background: var(--dorado);
+}
+
+.leyenda__cuadro--reservada {
+  border: 1px dashed var(--texto-suave);
+}
+
+.btn-deshacer {
+  margin-left: 16px;
+}

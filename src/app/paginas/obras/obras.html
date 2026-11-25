@@ -1,1 +1,62 @@
-<p>obras works!</p>
+<section class="contenedor pagina-obras">
+
+  <header class="obras__encabezado">
+    <p class="etiqueta">Disponibles en cartelera</p>
+    <h1>Obras</h1>
+  </header>
+
+
+  <div class="obras__superior">
+    <aside class="tarjeta-blanca obras__menu">
+      <h3>Categorías de obras</h3>
+      <div class="obras__arbol">
+        @for (n of arbol.raiz.hijos; track n.id) {
+          <app-arbol-menu
+            [nodo]="n"
+            [seleccionado]="categoriaActiva()"
+            (elegir)="elegir($event)"
+          />
+        }
+      </div>
+    </aside>
+
+    <div class="obras__derecha">
+      <!-- Aquí va la parte del trie -->
+      <div class="obras__buscador-box">
+        <input
+          class="obras__buscador"
+          type="text"
+          placeholder="Busca tu obra aquí"
+          disabled
+        />
+        <svg class="obras__lupa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+
+      @if (mostrarTemporada()) {
+        <article class="tarjeta-blanca temporada">
+          <img [src]="temporada.imagen" [alt]="temporada.titulo" />
+          <h3>¡Obra de la Temporada!</h3>
+          <a class="btn btn-primario" [routerLink]="['/obras', temporada.id]">Ver detalle</a>
+        </article>
+      }
+    </div>
+  </div>
+
+  @if (obras().length === 0) {
+    <p class="obras__vacio">No encontramos obras en esta categoría.</p>
+  }
+
+  <div class="obras__grilla">
+    @for (e of obras(); track e.id) {
+      <article class="tarjeta-blanca obra">
+        <img [src]="e.imagen" [alt]="e.titulo" />
+        <h3>{{ e.titulo }}</h3>
+        <p class="etiqueta">{{ e.fecha }}</p>
+        <a class="btn btn-primario" [routerLink]="['/obras', e.id]">Ver detalle</a>
+      </article>
+    }
+  </div>
+</section>
