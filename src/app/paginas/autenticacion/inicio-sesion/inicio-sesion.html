@@ -1,1 +1,37 @@
-<p>inicio-sesion works!</p>
+<h1>Iniciar Sesión/Registro</h1>
+
+<div class="inicio-sesion-container">
+    
+
+    <div>
+        <label>Correo electrónico</label>
+        <input type="email"
+            placeholder="Email"
+            [ngModel]="email()"
+            (ngModelChange)="email.set($event)"
+        >
+    </div>
+
+    <div>
+        <label >Contraseña</label>
+        <input type="password"
+            placeholder="Contrasena"
+            [ngModel]="contrasena()"
+            (ngModelChange)="contrasena.set($event)"
+        >
+    </div>
+
+    <div class="registro">
+        <button type="button" (click)="redirigirRegistro()">
+            Registrarse
+        </button>
+    </div>
+
+    <div class="button-iniciar">
+        <button type="button" (click)="handleLogin()">
+            Iniciar Sesión
+        </button>  
+    </div>
+
+    
+</div>

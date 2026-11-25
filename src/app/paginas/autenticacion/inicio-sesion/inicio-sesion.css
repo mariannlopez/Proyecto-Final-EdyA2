@@ -1,0 +1,118 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 90px);
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0 0 1.75rem;
+  text-align: center;
+}
+
+.inicio-sesion-container {
+  width: 505px;
+  max-width: 100%;
+  height: 369px;
+  background-color: #fbf7ef;
+  border-radius: 6px;
+  padding: 2rem 2.25rem;
+  box-shadow: 0 12px 28px rgba(45, 32, 16, 0.08);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1.5rem;
+  row-gap: 1rem;
+  align-content: center;
+}
+
+.inicio-sesion-container > div:not(.button-iniciar):not(.registro) {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.inicio-sesion-container label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6B5A4A;
+}
+
+.inicio-sesion-container input {
+  width: 100%;
+  height: 44px;
+  padding: 0 0.9rem;
+  font-size: 0.92rem;
+  color: #2b2620;
+  background-color: #FFF8EE;
+  border: 1px solid #3F342B;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.inicio-sesion-container input::placeholder {
+  color: #9b9286;
+}
+
+.inicio-sesion-container input:focus {
+  border-color: #8c6d2f;
+  box-shadow: 0 0 0 2px rgba(184, 142, 28, 0.14);
+}
+
+.button-iniciar,
+.registro {
+  margin-top: 0.5rem;
+}
+
+.button-iniciar button,
+.registro button {
+  width: 100%;
+  height: 48px;
+  padding: 0 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.button-iniciar button {
+    background-color: #fdfbf7;
+  border: 1px solid #b8ae9f;
+  font-weight: 600;
+  color: #6B5A4A;
+}
+
+.button-iniciar button:hover {
+  background-color: #b48b12;
+  border-color: #b48b12;
+}
+
+.registro button {
+  background-color: #c79c18;
+  border: 1px solid #c79c18;
+  font-weight: 600;
+  color: #3F342B;
+}
+
+.registro button:hover {
+  background-color: #f3ede2;
+  border-color: #8e8373;
+}
+
+@media (max-width: 540px) {
+  .inicio-sesion-container {
+    width: 100%;
+    height: auto;
+    min-height: 369px;
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.25rem;
+  }
+}

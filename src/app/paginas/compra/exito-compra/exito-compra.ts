@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-exito-compra',
@@ -6,4 +7,31 @@ import { Component } from '@angular/core';
   templateUrl: './exito-compra.html',
   styleUrl: './exito-compra.css',
 })
-export class ExitoCompra {}
+export class ExitoCompra implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+
+  boletaId = signal<string | null>(
+    this.route.snapshot.queryParamMap.get('boletaId') ??
+    (history.state?.ultimaBoletaId as string | undefined) ??
+    (history.state?.boletaId as string | undefined) ??
+    null
+  );
+
+  ngOnInit(): void {
+    console.log('[ExitoCompra] Montado:', {
+      urlActual: this.router.url,
+      state: history.state,
+      boletaId: this.boletaId(),
+    });
+  }
+
+  verDetallesBoleta(): void {
+    const id = this.boletaId();
+    if (id) {
+      this.router.navigate(['/tus-boletas', id]);
+    } else {
+      this.router.navigate(['/tus-boletas']);
+    }
+  }
+}

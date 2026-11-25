@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './general/guards/auth-guard';
 
 export const routes: Routes = [
  
@@ -19,6 +20,7 @@ export const routes: Routes = [
   //Privadas (Despues de inicio de sesión) -> Despues de aqui se agrega lo del auth guard
   {
     path: 'compra/:funcionId',
+    canActivate: [authGuard], 
   
     loadComponent: () => import('./paginas/compra/compra').then(m => m.Compra),
     children: [

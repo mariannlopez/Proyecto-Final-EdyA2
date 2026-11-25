@@ -1,0 +1,102 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 90px);
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0 0 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.registro-container {
+  width: 505px;
+  max-width: 100%;
+  min-height: 369px;
+  background-color: #fbf7ef;
+  border-radius: 6px;
+  padding: 2.25rem 2.25rem 2rem;
+  box-shadow: 0 12px 28px rgba(45, 32, 16, 0.08);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+}
+
+.registro-container > div:not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.registro-container label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #6B5A4A;
+  font-weight: 700;
+}
+
+.registro-container input {
+  width: 100%;
+  height: 44px;
+  padding: 0 0.9rem;
+  font-size: 0.92rem;
+  color: #2b2620;
+  background-color: #FFF8EE;
+  border: 1px solid #3F342B;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.registro-container input::placeholder {
+  color: #9b9286;
+}
+
+.registro-container input:focus {
+  border-color: #8c6d2f;
+  box-shadow: 0 0 0 2px rgba(184, 142, 28, 0.14);
+}
+
+.registro-container > div:last-child {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.registro-container > div:last-child button {
+  width: 100%;
+  max-width: 240px;
+  height: 48px;
+  padding: 0 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #c79c18;
+  border: 1px solid #c79c18;
+  color: #3F342B;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.registro-container > div:last-child button:hover {
+  background-color: #b48b12;
+  border-color: #b48b12;
+}
+
+@media (max-width: 540px) {
+  .registro-container {
+    width: 100%;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .registro-container > div:last-child button {
+    max-width: 100%;
+  }
+}

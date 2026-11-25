@@ -35,15 +35,6 @@
 .navbar__enlaces a.activo { border-bottom-color: var(--dorado); }
 .navbar__enlaces a:hover { color: var(--dorado); }
 
-.navbar__usuario {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--crema);
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .navbar__avatar {
   display: flex;
   align-items: center;
@@ -55,4 +46,59 @@
   color: var(--cafe-oscuro);
   font-size: 12px;
   font-weight: 700;
+}
+
+.navbar__usuario-wrap {
+  position: relative;
+}
+
+.navbar__usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--crema);
+  font-family: var(--fuente-titulo);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.navbar__flecha {
+  font-size: 12px;
+  color: var(--crema);
+}
+
+.navbar__menu-sesion {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 150px;
+  padding: 8px;
+  background: var(--cafe);
+  border: 1px solid rgba(251, 247, 239, 0.18);
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  z-index: 120;
+}
+
+.navbar__cerrar-sesion {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--dorado);
+  border-radius: 4px;
+  color: var(--crema);
+  font-family: var(--fuente-titulo);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.navbar__cerrar-sesion:hover {
+  background: var(--dorado);
+  color: var(--cafe-oscuro);
 }
