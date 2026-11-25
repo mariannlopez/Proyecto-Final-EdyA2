@@ -21,18 +21,36 @@
     </aside>
 
     <div class="obras__derecha">
-      <!-- Aquí va la parte del trie -->
-      <div class="obras__buscador-box">
-        <input
-          class="obras__buscador"
-          type="text"
-          placeholder="Busca tu obra aquí"
-          disabled
-        />
-        <svg class="obras__lupa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
+      <div class="obras__buscador-wrap">
+        <div class="obras__buscador-box">
+          <input
+            class="obras__buscador"
+            type="text"
+            placeholder="Busca tu obra aquí"
+            [value]="consulta()"
+            (input)="onBuscar($any($event.target).value)"
+            (focus)="menuAbierto.set(consulta().trim().length > 0)"
+          />
+          <svg class="obras__lupa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+
+        @if (menuAbierto() && consulta().trim().length > 0) {
+          <ul class="obras__sugerencias">
+            @for (obra of sugerencias(); track obra.id) {
+              <li class="obras__sugerencia-item" (click)="irAObra(obra.id)">
+                <span class="obras__sugerencia-titulo">{{ obra.titulo }}</span>
+                @if (obra.subtitulo) {
+                  <span class="obras__sugerencia-fecha">{{ obra.subtitulo }}</span>
+                }
+              </li>
+            } @empty {
+              <li class="obras__sugerencia-vacia">No se encontraron obras.</li>
+            }
+          </ul>
+        }
       </div>
 
       @if (mostrarTemporada()) {

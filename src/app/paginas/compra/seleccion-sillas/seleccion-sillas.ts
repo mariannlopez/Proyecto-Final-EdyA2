@@ -1,5 +1,8 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, output, signal, inject, computed, OnInit } from '@angular/core';
 import { Pila } from '../../../estructuras-datos/pila';
+import { FormsModule } from '@angular/forms';
+import { BoletasService } from '../../../general/services/boletas';
+import { Router, ActivatedRoute } from '@angular/router';
 
 export type EstadoSilla = 'libre' | 'ocupada' | 'seleccionada' | 'reservada';
 
@@ -13,16 +16,26 @@ export interface SillaMapa {
 @Component({
   selector: 'app-seleccion-sillas',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './seleccion-sillas.html',
   styleUrl: './seleccion-sillas.css',
 })
-export class SeleccionSillas {
+export class SeleccionSillas implements OnInit{
   // Emite las sillas elegidas hacia el componente padre (Compra / Pago de tu compañero)
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private boletasService = inject(BoletasService);
+
   seleccionCambio = output<SillaMapa[]>();
-
-
   historialSeleccion = new Pila<SillaMapa>();
+  funcionId = signal<string>('');
+
+  email = signal<string>('');
+  numeroTarjeta = signal<string>('');
+  fechaVencimiento = signal<string>('');
+  cvc = signal<string>('');
+  nombreTitular = signal<string>('');
+  mensajeError = signal<string>('');
 
   // Datos iniciales replicando el mapa B1 - B24 
   sillas = signal<SillaMapa[]>([
@@ -55,6 +68,22 @@ export class SeleccionSillas {
     { id: 'B24', codigo: 'B24', estado: 'reservada', precio: 45000 },
   ]);
 
+  sillasSeleccionadas = computed(() =>
+    this.sillas().filter((s) => s.estado === 'seleccionada')
+  );
+
+  totalPagar = computed(() =>
+    this.sillasSeleccionadas().reduce((acc, silla) => acc + silla.precio, 0)
+  );
+
+  ngOnInit(): void {
+    const id =
+      this.route.snapshot.paramMap.get('funcionId') ??
+      this.route.parent?.snapshot.paramMap.get('funcionId') ??
+      'funcion-1';
+    this.funcionId.set(id);
+  }
+
   alternarSilla(silla: SillaMapa): void {
     if (silla.estado === 'ocupada' || silla.estado === 'reservada') {
       return;
@@ -84,6 +113,30 @@ export class SeleccionSillas {
 
     this.actualizarEstadoSilla(ultimaSilla.id, 'libre');
     this.emitirSeleccion();
+  }
+
+  procesarCompraSimulada(): void {
+    if (this.sillasSeleccionadas().length === 0) {
+      this.mensajeError.set('Selecciona al menos una silla antes de pagar.');
+      return;
+    }
+
+    if (!this.email().trim() || !this.nombreTitular().trim()) {
+      this.mensajeError.set('Completa el correo electrónico y el nombre del titular.');
+      return;
+    }
+
+    this.mensajeError.set('');
+
+    const creadas = this.boletasService.agregarCompraSimulada({
+      sillas: this.sillasSeleccionadas(),
+      funcionId: this.funcionId(),
+    });
+
+    const primeraId = creadas[0]?.id;
+    this.router.navigate(['/tus-boletas'], {
+      state: { ultimaBoletaId: primeraId },
+    });
   }
 
   private actualizarEstadoSilla(id: string, nuevoEstado: EstadoSilla): void {

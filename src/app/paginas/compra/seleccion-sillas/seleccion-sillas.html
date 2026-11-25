@@ -1,51 +1,144 @@
-<div class="contenedor-mapa">
-  <div class="tarjeta-blanca mapa-card">
-    <div class="escenario">
-      <span>ESCENARIO</span>
-      <div class="escenario__linea"></div>
-    </div>
+<div class="compra-layout">
+  <div class="compra-izquierda">
+    <div class="contenedor-mapa">
+      <div class="mapa-card">
+        <div class="escenario">
+          <span>ESCENARIO</span>
+          <div class="escenario__linea"></div>
+        </div>
 
-    <div class="grilla-sillas">
-      @for (silla of sillas(); track silla.id) {
-        <button
-          type="button"
-          class="butaca"
-          [class]="'butaca butaca--' + silla.estado"
-          [disabled]="silla.estado === 'ocupada' || silla.estado === 'reservada'"
-          (click)="alternarSilla(silla)"
-        >
-          <span class="butaca__respaldo">{{ silla.codigo }}</span>
-          <span class="butaca__base"></span>
-        </button>
-      }
-    </div>
+        <div class="grilla-sillas">
+          @for (silla of sillas(); track silla.id) {
+            <button
+              type="button"
+              class="butaca"
+              [class]="'butaca butaca--' + silla.estado"
+              [disabled]="silla.estado === 'ocupada' || silla.estado === 'reservada'"
+              (click)="alternarSilla(silla)"
+            >
+              <span class="butaca__respaldo">{{ silla.codigo }}</span>
+              <span class="butaca__base"></span>
+            </button>
+          }
+        </div>
 
-    <div class="leyenda">
-      <div class="leyenda__item">
-        <span class="leyenda__cuadro leyenda__cuadro--libre"></span>
-        <span>Libre</span>
+        <div class="leyenda">
+          <div class="leyenda__item">
+            <span class="leyenda__cuadro leyenda__cuadro--libre"></span>
+            <span>Libre</span>
+          </div>
+          <div class="leyenda__item">
+            <span class="leyenda__cuadro leyenda__cuadro--ocupada"></span>
+            <span>Ocupada</span>
+          </div>
+          <div class="leyenda__item">
+            <span class="leyenda__cuadro leyenda__cuadro--seleccionada"></span>
+            <span>Seleccionada</span>
+          </div>
+          <div class="leyenda__item">
+            <span class="leyenda__cuadro leyenda__cuadro--reservada"></span>
+            <span>Reservada</span>
+          </div>
+        </div>
       </div>
-      <div class="leyenda__item">
-        <span class="leyenda__cuadro leyenda__cuadro--ocupada"></span>
-        <span>Ocupada</span>
-      </div>
-      <div class="leyenda__item">
-        <span class="leyenda__cuadro leyenda__cuadro--seleccionada"></span>
-        <span>Seleccionada</span>
-      </div>
-      <div class="leyenda__item">
-        <span class="leyenda__cuadro leyenda__cuadro--reservada"></span>
-        <span>Reservada</span>
-      </div>
+
+      <button
+        type="button"
+        class="btn btn-primario btn-deshacer"
+        [disabled]="historialSeleccion.estaVacia()"
+        (click)="deshacerUltimaEleccion()"
+      >
+        Deshacer última elección
+      </button>
     </div>
   </div>
 
-  <button
-    type="button"
-    class="btn btn-primario btn-deshacer"
-    [disabled]="historialSeleccion.estaVacia()"
-    (click)="deshacerUltimaEleccion()"
-  >
-    Deshacer última elección
-  </button>
+  <form class="tarjeta-pago" (ngSubmit)="procesarCompraSimulada()">
+    <div class="campo">
+      <label for="email-pago">E-Mail</label>
+      <input
+        id="email-pago"
+        type="email"
+        placeholder="Email"
+        [ngModel]="email()"
+        (ngModelChange)="email.set($event)"
+        name="email"
+      />
+    </div>
+
+    <div class="campo">
+      <label for="tarjeta-pago">Detalles de la Tarjeta</label>
+
+      <div class="input-con-icono">
+        <input
+          id="tarjeta-pago"
+          type="text"
+          placeholder="1234 1234 1234 1234"
+          [ngModel]="numeroTarjeta()"
+          (ngModelChange)="numeroTarjeta.set($event)"
+          name="numeroTarjeta"
+        />
+        <img
+          src="/M%C3%A9todos%20de%20Pago.png"
+          alt="Métodos de pago"
+          class="icono-metodos-pago"
+        />
+      </div>
+
+      <div class="fila-tarjeta">
+        <input
+          type="text"
+          placeholder="MM/YY"
+          [ngModel]="fechaVencimiento()"
+          (ngModelChange)="fechaVencimiento.set($event)"
+          name="fechaVencimiento"
+        />
+
+        <div class="input-con-icono">
+          <input
+            type="text"
+            placeholder="CVC"
+            [ngModel]="cvc()"
+            (ngModelChange)="cvc.set($event)"
+            name="cvc"
+          />
+          <img
+            src="/Pago_Seguro.png"
+            alt="Pago seguro"
+            class="icono-pago-seguro"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="titular-pago">Nombre del Titular</label>
+      <input
+        id="titular-pago"
+        type="text"
+        placeholder="Nombre"
+        [ngModel]="nombreTitular()"
+        (ngModelChange)="nombreTitular.set($event)"
+        name="nombreTitular"
+      />
+    </div>
+
+    @if (sillasSeleccionadas().length > 0) {
+      <p class="resumen-sillas">
+        Sillas:
+        @for (s of sillasSeleccionadas(); track s.id; let last = $last) {
+          <strong>{{ s.codigo }}</strong>@if (!last) {, }
+        }
+        — Total: <strong>${{ totalPagar() }}</strong>
+      </p>
+    }
+
+    @if (mensajeError()) {
+      <p class="error-pago">{{ mensajeError() }}</p>
+    }
+
+    <div class="acciones-pago">
+      <button type="submit" class="btn-pagar">Pagar</button>
+    </div>
+  </form>
 </div>
