@@ -1,0 +1,49 @@
+[33mcommit 7ee88de0780df411372c49fb4db66440f7b94ae6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: a6074c0 84d1068
+Author: Christopher Veca Murillo <cvecamurillo@gmail.com>
+Date:   Wed Nov 25 12:28:02 2026 -0500
+
+    Merge pull request #5 from mariannlopez/christopher-2
+    
+    Proyecto-Terminado
+
+ package-lock.json                                  | 1599 [32m++++++++++++++++++[m[31m--[m
+ package.json                                       |    3 [32m+[m[31m-[m
+ "public/M\303\251todos de Pago.png"                |  Bin [31m0[m -> [32m118042[m bytes
+ public/Pago_Seguro.png                             |  Bin [31m0[m -> [32m102979[m bytes
+ src/app/app.html                                   |    2 [32m+[m[31m-[m
+ src/app/app.routes.ts                              |    2 [32m+[m
+ src/app/base/navbar/navbar.css                     |   64 [32m+[m[31m-[m
+ src/app/base/navbar/navbar.html                    |   31 [32m+[m[31m-[m
+ src/app/base/navbar/navbar.ts                      |   50 [32m+[m[31m-[m
+ src/app/estructuras-datos/cola.ts                  |   27 [32m+[m
+ src/app/estructuras-datos/trie.ts                  |  133 [32m++[m
+ src/app/firebase/auth.ts                           |   28 [32m+[m
+ src/app/general/guards/auth-guard.ts               |   24 [32m+[m[31m-[m
+ src/app/general/services/boletas.ts                |   48 [32m+[m
+ .../services/sillas-firebase-service.spec.ts       |   16 [32m+[m
+ .../general/services/sillas-firebase-service.ts    |  125 [32m++[m
+ .../autenticacion/inicio-sesion/inicio-sesion.css  |  118 [32m++[m
+ .../autenticacion/inicio-sesion/inicio-sesion.html |   38 [32m+[m[31m-[m
+ .../autenticacion/inicio-sesion/inicio-sesion.ts   |   41 [32m+[m[31m-[m
+ .../paginas/autenticacion/registro/registro.css    |  102 [32m++[m
+ .../paginas/autenticacion/registro/registro.html   |   35 [32m+[m[31m-[m
+ src/app/paginas/autenticacion/registro/registro.ts |   32 [32m+[m[31m-[m
+ src/app/paginas/compra/compra.ts                   |   12 [32m+[m[31m-[m
+ .../paginas/compra/exito-compra/exito-compra.css   |   60 [32m+[m
+ .../paginas/compra/exito-compra/exito-compra.html  |    8 [32m+[m[31m-[m
+ .../paginas/compra/exito-compra/exito-compra.ts    |   32 [32m+[m[31m-[m
+ src/app/paginas/compra/sala-espera/sala-espera.css |   87 [32m++[m
+ .../paginas/compra/sala-espera/sala-espera.html    |   16 [32m+[m[31m-[m
+ src/app/paginas/compra/sala-espera/sala-espera.ts  |   60 [32m+[m[31m-[m
+ .../compra/seleccion-sillas/seleccion-sillas.css   |  300 [32m+++[m[31m-[m
+ .../compra/seleccion-sillas/seleccion-sillas.html  |  180 [32m++[m[31m-[m
+ .../compra/seleccion-sillas/seleccion-sillas.ts    |  204 [32m++[m[31m-[m
+ src/app/paginas/obras/obras.css                    |   54 [32m+[m
+ src/app/paginas/obras/obras.html                   |   42 [32m+[m[31m-[m
+ src/app/paginas/obras/obras.ts                     |   63 [32m+[m[31m-[m
+ src/app/service/lista-espera-service.spec.ts       |   16 [32m+[m
+ src/app/service/lista-espera-service.ts            |  106 [32m++[m
+ .../service/realtime-collection-service.spec.ts    |   16 [32m+[m
+ src/app/service/realtime-collection-service.ts     |  123 [32m++[m
+ 39 files changed, 3632 insertions(+), 265 deletions(-)
