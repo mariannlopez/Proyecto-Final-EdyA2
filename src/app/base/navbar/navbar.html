@@ -7,17 +7,36 @@
     <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
     <a routerLink="/obras" routerLinkActive="activo">Obras</a>
     <a
-      [routerLink]="sesionIniciada ? '/tus-boletas' : '/iniciar-sesion'"
+      [routerLink]="sesionIniciada() ? '/tus-boletas' : '/iniciar-sesion'"
       routerLinkActive="activo"
     >
       Tus boletas
     </a>
 
-    @if (sesionIniciada) {
-      <div class="navbar__usuario">
-        <span class="navbar__avatar">{{ iniciales }}</span>
-        <span>{{ nombreUsuario }}</span>
-        <span class="navbar__flecha" aria-hidden="true">∨</span>
+    @if (sesionIniciada()) {
+      <div class="navbar__usuario-wrap">
+        <button
+          type="button"
+          class="navbar__usuario"
+          (click)="alternarMenu()"
+          [attr.aria-expanded]="menuAbierto()"
+        >
+          <span class="navbar__avatar">{{ iniciales() }}</span>
+          <span>{{ nombreUsuario() }}</span>
+          <span class="navbar__flecha" aria-hidden="true">∨</span>
+        </button>
+
+        @if (menuAbierto()) {
+          <div class="navbar__menu-sesion">
+            <button
+              type="button"
+              class="navbar__cerrar-sesion"
+              (click)="cerrarSesion()"
+            >
+              Cerrar sesión
+            </button>
+          </div>
+        }
       </div>
     } @else {
       <a routerLink="/iniciar-sesion" routerLinkActive="activo">Iniciar sesión</a>
