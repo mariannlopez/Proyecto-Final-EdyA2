@@ -1,0 +1,19 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 36px;
+  padding-right: 16px;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--cafe-oscuro);
+  font-family: var(--fuente-titulo);
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+}
+.guion { color: var(--dorado); }
+.item:hover { background: #FBF4E6; }
+.item.activo { background: #F6ECD6; border-left-color: var(--dorado); }

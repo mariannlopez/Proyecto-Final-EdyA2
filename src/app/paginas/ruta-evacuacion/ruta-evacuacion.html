@@ -1,1 +1,150 @@
-<p>ruta-evacuacion works!</p>
+<section class="contenedor pagina-evacuacion">
+  <div class="evacuacion__grid">
+    <aside class="evacuacion__info">
+      <h1>RUTA DE EVACUACIÓN EN CASO DE EMERGENCIAS</h1>
+
+      @if (evacuacion(); as ruta) {
+        <div class="evacuacion__datos">
+          <p><strong>Tu silla: {{ sillaActual().id }} · {{ sillaActual().zona }}</strong></p>
+          <p><strong>Salida más cercana: {{ ruta.salida.nombreSalida }}</strong></p>
+          <p><strong>Distancia: {{ ruta.distanciaTotal }} m</strong></p>
+        </div>
+
+        <ol class="evacuacion__pasos">
+          @for (paso of ruta.pasos; track $index) {
+            <li>{{ paso }}</li>
+          }
+        </ol>
+      }
+    </aside>
+
+    <div class="tarjeta-blanca evacuacion__mapa-card">
+      <svg viewBox="0 0 540 585" class="plano-svg" role="img" aria-label="Mapa de evacuación del teatro">
+        <text x="270" y="26" text-anchor="middle" class="svg-escenario-txt">ESCENARIO</text>
+        <line x1="70" y1="38" x2="470" y2="38" stroke="var(--dorado)" stroke-width="2" />
+
+        <rect x="36" y="54" width="34" height="346" fill="#B5A695" />
+        <rect x="470" y="54" width="34" height="346" fill="#B5A695" />
+        <rect x="36" y="366" width="468" height="34" fill="#B5A695" />
+        <rect x="240" y="400" width="60" height="16" fill="#B5A695" />
+        <rect x="36" y="416" width="468" height="84" fill="#D5CEC4" />
+        <rect x="240" y="500" width="60" height="14" fill="#B5A695" />
+
+        <text x="53" y="310" transform="rotate(-90 53 310)" text-anchor="middle" class="svg-zona-txt">
+          Pasillo izquierdo
+        </text>
+        <text x="487" y="310" transform="rotate(-90 487 310)" text-anchor="middle" class="svg-zona-txt">
+          Pasillo derecho
+        </text>
+        <text x="150" y="387" text-anchor="middle" class="svg-zona-txt">Pasillo principal</text>
+        <text x="395" y="465" text-anchor="middle" class="svg-lobby-txt">Lobby</text>
+
+        <rect x="34" y="185" width="38" height="58" fill="var(--verde)" />
+        <text x="50" y="214" transform="rotate(-90 50 214)" text-anchor="middle" class="svg-salida-txt">
+          Salida
+        </text>
+        <text x="61" y="214" transform="rotate(-90 61 214)" text-anchor="middle" class="svg-salida-txt">
+          izquierda
+        </text>
+
+        <rect x="468" y="185" width="38" height="58" fill="var(--verde)" />
+        <text x="484" y="214" transform="rotate(-90 484 214)" text-anchor="middle" class="svg-salida-txt">
+          Salida
+        </text>
+        <text x="495" y="214" transform="rotate(-90 495 214)" text-anchor="middle" class="svg-salida-txt">
+          derecha
+        </text>
+
+        <rect x="200" y="514" width="140" height="42" fill="var(--verde)" />
+        <text x="270" y="532" text-anchor="middle" class="svg-salida-txt">Salida</text>
+        <text x="270" y="544" text-anchor="middle" class="svg-salida-txt">principal</text>
+
+        @for (silla of sillasPlano; track silla.id) {
+          <g
+            class="svg-silla"
+            [class.svg-silla--activa]="silla.id === sillaActual().id"
+            (click)="seleccionarSilla(silla.id)"
+          >
+            <rect
+              [attr.x]="silla.x - 15"
+              [attr.y]="silla.y - 14"
+              width="30"
+              height="26"
+              rx="5"
+              [attr.fill]="silla.id === sillaActual().id ? 'var(--dorado)' : 'var(--crema)'"
+              [attr.stroke]="silla.id === sillaActual().id ? 'var(--dorado)' : 'var(--texto-suave)'"
+              stroke-width="1"
+            />
+            <rect
+              [attr.x]="silla.x - 18"
+              [attr.y]="silla.y + 13"
+              width="36"
+              height="6"
+              rx="2"
+              [attr.fill]="silla.id === sillaActual().id ? 'var(--dorado)' : 'var(--crema)'"
+              [attr.stroke]="silla.id === sillaActual().id ? 'var(--dorado)' : 'var(--texto-suave)'"
+              stroke-width="1"
+            />
+            <text
+              [attr.x]="silla.x"
+              [attr.y]="silla.y + 3"
+              text-anchor="middle"
+              class="svg-silla-txt"
+              [attr.fill]="silla.id === sillaActual().id ? 'var(--cafe-oscuro)' : 'var(--texto-suave)'"
+            >
+              {{ silla.id }}
+            </text>
+          </g>
+        }
+
+        @for (arista of aristas; track $index) {
+          <path
+            [attr.d]="tramoCurvo(arista.origen, arista.destino)"
+            fill="none"
+            stroke="#8A7A6A"
+            stroke-width="1"
+          />
+        }
+
+        @if (rutaActivaPath()) {
+          <path
+            [attr.d]="rutaActivaPath()"
+            fill="none"
+            stroke="var(--dorado)"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        }
+
+        @for (nodo of nodos; track nodo.id) {
+          @if (nodo.esSalida) {
+            <circle
+              [attr.cx]="nodo.x"
+              [attr.cy]="nodo.y"
+              r="6"
+              fill="var(--verde)"
+            />
+          } @else {
+            <circle
+              [attr.cx]="nodo.x"
+              [attr.cy]="nodo.y"
+              r="6"
+              [attr.fill]="esNodoEnRuta(nodo.id) ? 'var(--dorado)' : 'var(--blanco)'"
+              [attr.stroke]="esNodoEnRuta(nodo.id) ? 'var(--dorado)' : 'var(--cafe-oscuro)'"
+              stroke-width="1.2"
+            />
+          }
+        }
+      </svg>
+
+      <div class="mapa-leyenda">
+        <span><i class="dot dot--nodo"></i> Nodo</span>
+        <span><i class="dot dot--salida"></i> Salidas</span>
+        <span><i class="dot dot--silla"></i> Tu silla</span>
+        <span><i class="line-ruta"></i> Ruta</span>
+        <span><i class="dot dot--nodo-salida"></i> Nodo de salida</span>
+      </div>
+    </div>
+  </div>
+</section>
