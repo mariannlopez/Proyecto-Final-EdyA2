@@ -1,1 +1,38 @@
-<p>detalle-boleta works!</p>
+<section class="contenedor pagina-detalle">
+  @if (boletaActual(); as item) {
+    <article class="boleto-ticket">
+      <div class="boleto-ticket__izquierda">
+        <h1 class="boleto-ticket__titulo">
+          {{ item.tituloObra }}
+          @if (subtituloEvento()) {
+            <span class="boleto-ticket__subtitulo">({{ subtituloEvento() }})</span>
+          }
+        </h1>
+
+        <div class="boleto-ticket__imagen-wrap">
+          <img
+            [src]="item.imagen"
+            [alt]="item.tituloObra"
+            class="boleto-ticket__imagen"
+          />
+        </div>
+      </div>
+
+      <div class="boleto-ticket__derecha">
+        <p class="boleto-ticket__fecha">{{ item.fechaHora }}</p>
+        <p class="boleto-ticket__silla">Silla: {{ item.boleta.silla }}</p>
+
+        <a
+            [routerLink]="['/evacuacion', item.boleta.silla]"
+            class="boleto-ticket__boton"
+        >
+            Ver ruta de evacuación
+        </a>
+
+        <p class="boleto-ticket__codigo">CÓDIGO: {{ item.boleta.codigo }}</p>
+      </div>
+    </article>
+  } @else {
+    <p class="boleto-ticket__vacio">No se encontró la boleta solicitada.</p>
+  }
+</section>
