@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { Unsubscribe } from 'firebase/auth';
 import { Cola } from '../estructuras-datos/cola';
-import { onValue, ref, remove, set } from 'firebase/database';
+import { getDatabase, onValue, ref, remove, set } from 'firebase/database';
 import { auth, db } from '../firebase/auth';
 import { currentDocument } from 'firebase/firestore/pipelines';
 
@@ -18,6 +18,7 @@ export interface EntradaEspera{
 export class ListaEsperaService {
   private unsubscribe?: Unsubscribe; 
   private rutaActual = '';
+  private db = getDatabase();
 
   isPending = signal<boolean>(false);
   error = signal<string | null>(null);
@@ -89,6 +90,14 @@ export class ListaEsperaService {
     if (!clave) return;
 
     await remove(ref(db, `listas-espera/${funcionId}/${clave}`));
+  }
+
+  async salirDeListaEspera(funcionId: string, uidParam?: string | null): Promise<void> {
+    const uid = uidParam ?? auth.currentUser?.uid;
+    if (!funcionId || !uid) return;
+
+    const nodoUsuario = ref(this.db, `listas-espera/${funcionId}/${uid}`);
+    await remove(nodoUsuario);
   }
 
   async avanzarSiguiente(funcionId: string): Promise<void>{

@@ -14,6 +14,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../../firebase/auth';
 import { SillasFirebaseService, SillaFirebase } from '../../../general/services/sillas-firebase-service';
+import { ListaEsperaService } from '../../../service/lista-espera-service';
 
 export type EstadoSilla = 'libre' | 'ocupada' | 'seleccionada' | 'reservada';
 
@@ -36,6 +37,7 @@ export class SeleccionSillas implements OnInit, OnDestroy {
   private router = inject(Router);
   private boletasService = inject(BoletasService);
   private sillasFirebase = inject(SillasFirebaseService);
+  private listaEspera = inject(ListaEsperaService)
 
   seleccionCambio = output<SillaMapa[]>();
   historialSeleccion = new Pila<SillaMapa>();
@@ -234,6 +236,8 @@ export class SeleccionSillas implements OnInit, OnDestroy {
         sillas: elegidas,
         funcionId: this.funcionId(),
       });
+
+      await this.listaEspera.salirDeFila(this.funcionId());
 
       const primeraId = creadas[0]?.id;
       await this.router.navigate(['/compra', this.funcionId(), 'exito'], {
