@@ -1,0 +1,18 @@
+<button
+  class="item"
+  [class.activo]="seleccionado() === nodo().id"
+  [style.padding-left.px]="16 + nivel() * 14"
+  (click)="elegir.emit(nodo().id)"
+>
+  <span class="guion">—</span>
+  {{ nodo().nombre }}
+</button>
+
+@for (hijo of nodo().hijos; track hijo.id) {
+  <app-arbol-menu
+    [nodo]="hijo"
+    [nivel]="nivel() + 1"
+    [seleccionado]="seleccionado()"
+    (elegir)="elegir.emit($event)"
+  />
+}

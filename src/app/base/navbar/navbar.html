@@ -1,1 +1,26 @@
-<p>navbar works!</p>
+<header class="navbar">
+  <a routerLink="/" class="navbar__logo">
+    <img src="logo.svg" alt="Teatro Municipal Enrique Buenaventura" height="48" />
+  </a>
+
+  <nav class="navbar__enlaces">
+    <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+    <a routerLink="/obras" routerLinkActive="activo">Obras</a>
+    <a
+      [routerLink]="sesionIniciada ? '/tus-boletas' : '/iniciar-sesion'"
+      routerLinkActive="activo"
+    >
+      Tus boletas
+    </a>
+
+    @if (sesionIniciada) {
+      <div class="navbar__usuario">
+        <span class="navbar__avatar">{{ iniciales }}</span>
+        <span>{{ nombreUsuario }}</span>
+        <span class="navbar__flecha" aria-hidden="true">∨</span>
+      </div>
+    } @else {
+      <a routerLink="/iniciar-sesion" routerLinkActive="activo">Iniciar sesión</a>
+    }
+  </nav>
+</header>

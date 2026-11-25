@@ -1,0 +1,82 @@
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 460px;
+  margin-top: 60px;
+}
+
+
+
+.hero__mapa { position: relative; }
+
+.hero__mapa iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 460px;
+  border: 0;
+  display: block;
+}
+
+
+.hero__direccion {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: var(--dorado);
+  color: var(--cafe-oscuro);
+  padding: 14px 20px;
+}
+.hero__direccion .etiqueta { color: var(--cafe-oscuro); font-weight: 700; }
+
+
+.hero__direccion p { margin: 4px 0 0; font-family: var(--fuente-titulo); font-size: 15px; }
+
+.hero__texto {
+  background: var(--cafe);
+  color: var(--crema);
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero__texto h1 { font-size: 2.6rem; margin: 12px 0 20px; }
+.hero__descripcion { font-size: 15px; opacity: 0.9; margin: 0 0 28px; }
+.hero__botones { display: flex; gap: 12px; }
+
+
+.historia {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 80px;
+}
+
+.historia__texto { padding: 40px 48px 40px 0; align-self: center; }
+.historia__texto p { font-size: 15px; color: var(--cafe); margin: 0 0 16px; }
+
+.historia__foto {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  display: block;
+  background: var(--borde);
+}
+
+.historia__cifras {
+  background: var(--cafe);
+  color: var(--crema);
+  padding: 40px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+.cifra { display: flex; align-items: baseline; gap: 16px; }
+.cifra strong {
+  font-family: var(--fuente-titulo);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--dorado);
+  min-width: 90px;
+}
+.cifra span { font-size: 15px; }

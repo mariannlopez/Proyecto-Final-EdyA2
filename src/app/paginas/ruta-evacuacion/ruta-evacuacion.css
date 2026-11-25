@@ -1,0 +1,150 @@
+.pagina-evacuacion {
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+.evacuacion__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Panel izquierdo café */
+.evacuacion__info {
+  background: var(--cafe);
+  color: var(--crema);
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.evacuacion__info h1 {
+  font-family: var(--fuente-texto);
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  color: var(--dorado);
+  margin: 0 0 32px;
+}
+
+.evacuacion__datos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.evacuacion__datos p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--crema);
+}
+
+.evacuacion__pasos {
+  margin: 0;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* Panel derecho blanco */
+.evacuacion__mapa-card {
+  padding: 24px 24px 20px;
+  border: 1px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plano-svg {
+  width: 100%;
+  max-width: 490px;
+  height: auto;
+}
+
+.svg-escenario-txt {
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  fill: var(--texto-suave);
+}
+
+.svg-zona-txt {
+  font-size: 8px;
+  fill: var(--cafe-oscuro);
+}
+
+.svg-lobby-txt {
+  font-size: 20px;
+  font-weight: 600;
+  fill: var(--cafe-oscuro);
+}
+
+.svg-salida-txt {
+  font-size: 8px;
+  font-weight: 700;
+  fill: var(--blanco);
+}
+
+.svg-silla {
+  cursor: pointer;
+}
+
+.svg-silla-txt {
+  font-size: 8px;
+  font-weight: 700;
+}
+
+/* Leyenda */
+.mapa-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: var(--cafe-oscuro);
+}
+
+.mapa-leyenda span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot--nodo {
+  border: 1px solid var(--cafe-oscuro);
+  background: var(--blanco);
+}
+
+.dot--salida {
+  border-radius: 2px;
+  background: var(--verde);
+}
+
+.dot--silla {
+  background: var(--dorado);
+}
+
+.dot--nodo-salida {
+  background: var(--verde);
+}
+
+.line-ruta {
+  width: 14px;
+  height: 2px;
+  background: var(--dorado);
+  display: inline-block;
+}

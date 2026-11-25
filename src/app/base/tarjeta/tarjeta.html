@@ -1,1 +1,18 @@
-<p>tarjeta works!</p>
+<aside class="tarjeta-cafe">
+  @if (etiqueta()) {
+    <p class="etiqueta">{{ etiqueta() }}</p>
+  }
+
+  @if (frase()) {
+    <blockquote class="tarjeta-cafe__frase">
+      “{{ frase() }}”
+    </blockquote>
+  }
+
+  @if (autor()) {
+    <p class="tarjeta-cafe__autor">- {{ autor() }}</p>
+  }
+
+  <!-- Permite meter contenido extra si la reutilizas en Inicio -->
+  <ng-content></ng-content>
+</aside>

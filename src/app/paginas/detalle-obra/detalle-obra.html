@@ -1,1 +1,41 @@
-<p>detalle-obra works!</p>
+<section class="contenedor pagina-detalle">
+  @if (obra(); as item) {
+    <div class="detalle__grilla">
+      <!-- Columna 1: Imagen, sinopsis y botón -->
+      <div class="detalle__izquierda">
+        <img [src]="item.imagen" [alt]="item.titulo" />
+
+        <p class="etiqueta">Sinopsis</p>
+        <p class="detalle__sinopsis">{{ item.sinopsis }}</p>
+
+        <a
+            class="btn btn-primario detalle__boton"
+            [routerLink]="['/compra', item.id]"
+        >
+            Comprar boletas
+        </a>
+      </div>
+
+   
+      <div class="detalle__centro">
+        <h1>{{ item.titulo }}</h1>
+
+        <p class="detalle__fecha">{{ item.fecha }}</p>
+
+        <p class="detalle__seccion">{{ item.seccion || 'SECCIÓN 1' }}</p>
+        <p class="detalle__precio">{{ item.precio || '$45.000' }}</p>
+      </div>
+
+      <app-tarjeta
+        etiqueta="EN CARTELERA"
+        [frase]="item.frase || 'El teatro es poesía que se sale del libro para hacerse humana.'"
+        [autor]="item.autorFrase || 'Federico García Lorca'"
+      />
+    </div>
+  } @else {
+    <div class="detalle__no-encontrada">
+      <h2>No encontramos esta obra</h2>
+      <a class="btn btn-primario" routerLink="/obras">Volver a cartelera</a>
+    </div>
+  }
+</section>
