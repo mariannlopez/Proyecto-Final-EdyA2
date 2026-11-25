@@ -4,6 +4,5 @@ export interface Boleta {
   eventoId: string;
   funcionId: string;
   silla: string;         
-  codigo: string;        
-  fechaCompra: Date;   
+  codigo: string;           
 }
