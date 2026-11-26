@@ -10,7 +10,7 @@ del Teatro Municipal Enrique Buenaventura (Cali).
 ## Enlaces
 - Propuesta gráfica (Figma): (https://www.figma.com/site/sBZxsjVa4GP5ptkQqwWnZq/figma-estructuras-de-datos?node-id=0-1&t=2DxYAM8z2cqrxk2b-1)
 - Sitio desplegado (Netlify): (https://bucolic-gingersnap-7b16c3.netlify.app)
-- Documento final: `docs/documento-final.pdf`
+- Documento final: Adjunto como Proyecto Final de Estructuras de datos y algoritmos 2.pdf
 
 ## Estructuras de datos
 Cola, Pila, Árbol n-ario, Trie y Grafo.
